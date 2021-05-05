@@ -27,8 +27,10 @@
         android:layout_marginTop="400dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Username..."
-        android:textColor="@color/black"/>
+        android:hint="Username..."
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/black"/>
 
     <EditText
         android:id="@+id/editPassword"
@@ -38,8 +40,10 @@
         android:layout_marginTop="455dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Password..."
-        android:textColor="@color/black"/>
+        android:hint="Password..."
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/black"/>
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -48,7 +52,8 @@
         android:text="Relembrar ao entrar?"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="500dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        />
 
     <Button
         android:id="@+id/button"

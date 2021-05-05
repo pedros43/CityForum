@@ -22,7 +22,7 @@ class Login : AppCompatActivity() {
     private lateinit var editUsernameView: EditText
     private lateinit var editPasswordView: EditText
     private lateinit var checkboxRemeber: CheckBox
-    private lateinit var shared_preferences: SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
     private var lembrar = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +32,8 @@ class Login : AppCompatActivity() {
         editPasswordView = findViewById(R.id.editPassword)
         checkboxRemeber = findViewById(R.id.checkBox)
 
-        shared_preferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE)
-        lembrar = shared_preferences.getBoolean("lembrar", false)
+        sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE)
+        lembrar = sharedPreferences.getBoolean("lembrar", false)
 
         if(lembrar){
             val intent = Intent(this@Login, Menu::class.java)
@@ -59,12 +59,12 @@ class Login : AppCompatActivity() {
                         if(c.status == "false"){
                             Toast.makeText(this@Login, c.MSG, Toast.LENGTH_LONG).show()
                         }else{
-                            val shared_preferences_edit : SharedPreferences.Editor = shared_preferences.edit()
-                            shared_preferences_edit.putString("username", username)
-                            shared_preferences_edit.putString("password", password)
-                            shared_preferences_edit.putInt("id", c.id)
-                            shared_preferences_edit.putBoolean("lembrar", checked_remember)
-                            shared_preferences_edit.apply()
+                            val sharedPreferencesEdit : SharedPreferences.Editor = sharedPreferences.edit()
+                            sharedPreferencesEdit.putString("username", username)
+                            sharedPreferencesEdit.putString("password", password)
+                            sharedPreferencesEdit.putInt("id", c.id)
+                            sharedPreferencesEdit.putBoolean("lembrar", checked_remember)
+                            sharedPreferencesEdit.apply()
 
                             val intent = Intent(this@Login, Menu::class.java)
                             startActivity(intent)
