@@ -1,4 +1,4 @@
-package my.app.cityforum.adapters
+package my.app.cityforum.data
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,18 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import my.app.cityforum.CellClickListener
+import my.app.cityforum.addClick
 import my.app.cityforum.R
-import my.app.cityforum.entities.Note
 
 
-class NoteListAdapter internal constructor(context: Context) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
-    private val cellClickListener: CellClickListener
+class NotaAdapter internal constructor(context: Context, private val addClick: addClick ) : RecyclerView.Adapter<NotaAdapter.NoteViewHolder>() {
+
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var notes = emptyList<Note>()
+    private var notes = emptyList<Nota>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
+        val itemView = inflater.inflate(R.layout.recyclerview, parent, false)
         return NoteViewHolder(itemView)
     }
 
@@ -33,12 +32,12 @@ class NoteListAdapter internal constructor(context: Context) : RecyclerView.Adap
         holder.noteItemViewContent.text = current.content
 
         holder.itemView.setOnClickListener {
-            cellClickListener.onCellClickListener(current)
+            addClick.onCellClickListener(current)
         }
 
     }
-    internal fun setNotes(notes: List<Note>) {
-        this.notes = notes
+    internal fun setNotes(notas: List<Nota>) {
+        this.notes = notas
         notifyDataSetChanged()
     }
 

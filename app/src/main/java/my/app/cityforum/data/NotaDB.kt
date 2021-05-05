@@ -1,4 +1,4 @@
-package my.app.cityforum.db
+package my.app.cityforum.data
 
 import android.content.Context
 import androidx.room.Database
@@ -7,13 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import my.app.cityforum.dao.NoteDao
-import my.app.cityforum.entities.Note
 
-@Database(entities = arrayOf(Note::class), version = 1, exportSchema = false)
-public abstract class NoteDB : RoomDatabase() {
+@Database(entities = arrayOf(Nota::class), version = 1, exportSchema = false)
+public abstract class NotaDB : RoomDatabase() {
 
-    abstract fun noteDao(): NoteDao
+    abstract fun noteDao(): NotaDao
 
     private class WordDatabaseCallback(
         private val scope: CoroutineScope
@@ -24,15 +22,6 @@ public abstract class NoteDB : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     var noteDao = database.noteDao()
-                    //Delete all content here.
-                    /*noteDao.deleteAll()
-
-                    //Add sample words.
-                    var note = Note(1, "Titulo", "Conteudo")
-                        noteDao.insert(note)
-                        note = Note(2, "Titulo 2", "Conteudo 2")
-                        noteDao.insert(note)
-                     */
                 }
             }
         }
@@ -40,9 +29,9 @@ public abstract class NoteDB : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: NoteDB? = null
+        private var INSTANCE: NotaDB? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): NoteDB {
+        fun getDatabase(context: Context, scope: CoroutineScope): NotaDB {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -50,7 +39,7 @@ public abstract class NoteDB : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    NoteDB::class.java,
+                    NotaDB::class.java,
                     "notes_database",
                 )
                     //.fallbackToDestructiveMigration()

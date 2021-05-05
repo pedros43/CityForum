@@ -1,7 +1,18 @@
 <resources>
-    <string name="app_name">CityForum</string>
+    <string name="app_name">City Care</string>
     <string name="todo" />
     <string name="log" />
-    <string name="notes" />
+    <string name="notas" />
     <string name="textview">TextView</string>
+    <string name="insere_o_conte_do">Insere o Conteúdo</string>
+    <string name="insere_o_t_tulo">Insere o Título</string>
+    <string name="guardar">Guardar</string>
+    <string name="editar">Editar</string>
+    <string name="add_note">Add nota</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="username">Username</string>
+    <string name="password">password</string>
+    <string name="login">LOGIN</string>
+    <string name="title_activity_mapas">Map</string>
 </resources>
