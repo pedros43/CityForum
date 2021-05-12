@@ -2,9 +2,14 @@ package my.app.cityforum
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -21,8 +26,11 @@ import retrofit2.Call
 class Mapas : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var shared_preferences: SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var problemas: List<Problemas>
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +40,14 @@ class Mapas : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        shared_preferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+        sharedPreferences = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getReports()
         var coordenadas: LatLng
-        val user_id = shared_preferences.getInt("id", 0)
+        val user_id = sharedPreferences.getInt("id", 0)
 
         call.enqueue(object : retrofit2.Callback<List<Problemas>> {
             override fun onResponse(call: retrofit2.Call<List<Problemas>>, response: retrofit2.Response<List<Problemas>>){
@@ -66,5 +76,32 @@ class Mapas : AppCompatActivity(), OnMapReadyCallback {
       val gmr = LatLng(41.4418, -8.29563)
         mMap.addMarker(MarkerOptions().position(gmr).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(gmr))
+
+        setUpMap()
+    }
+
+    private fun setUpMap() {
+        if(ActivityCompat.checkSelfPermission(this,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+
+            return
+        } else{
+            //1
+            mMap.isMyLocationEnabled = true
+
+            //2
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) {location ->
+                //3
+                if(location != null){
+                    lastLocation = location
+                    Toast.makeText(this@Mapas, lastLocation.toString(), Toast.LENGTH_SHORT).show()
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                }
+            }
+        }
     }
 }
