@@ -29,7 +29,7 @@ class Mapas : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var problemas: List<Problemas>
     private lateinit var lastLocation: Location
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class Mapas : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         sharedPreferences = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
 
@@ -93,7 +93,7 @@ class Mapas : AppCompatActivity(), OnMapReadyCallback {
             mMap.isMyLocationEnabled = true
 
             //2
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener(this) {location ->
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) {location ->
                 //3
                 if(location != null){
                     lastLocation = location

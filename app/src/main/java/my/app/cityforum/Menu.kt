@@ -1,5 +1,6 @@
 package my.app.cityforum
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +15,9 @@ class Menu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        sharedPreferences = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
+
     }
-
-
     fun mapasActivity(view: View){
         val intent = Intent(this@Menu, Mapas::class.java)
         startActivity(intent)

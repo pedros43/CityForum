@@ -32,7 +32,7 @@ class Login : AppCompatActivity() {
         editPasswordView = findViewById(R.id.editPassword)
         checkboxRemeber = findViewById(R.id.checkBox)
 
-        sharedPreferences = getSharedPreferences("shared_preferences", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
         lembrar = sharedPreferences.getBoolean("lembrar", false)
 
         if(lembrar){
