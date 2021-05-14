@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">City Care</string>
+    <string name="todo">todo</string>
+    <string name="notas">nota</string>
+    <string name="textview">textView</string>
+    <string name="insere_o_conte_do">Adicionar Conteúdo</string>
+    <string name="insere_o_t_tulo">Adicionar Titulo</string>
+    <string name="guardar">Guardar</string>
+    <string name="editar">Editar</string>
+    <string name="add_note">Adicionar nota</string>
+    <string name="title">Titulo</string>
+    <string name="content">Conteúdo</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="title_activity_mapas">Mapa</string>
+    <string name="notaspessoais">Notas Pessoais</string>
+    <string name="maps">MAPA</string>
+    <string name="remember">Relembrar ao entrar?</string>
+    <string name="remove">Remover</string>
+</resources>

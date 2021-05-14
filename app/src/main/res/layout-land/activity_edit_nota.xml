@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:fontFamily="sans-serif-light"
-        android:hint="@string/insere_o_t_tulo"
+        android:hint="Insere o Título"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:inputType="textAutoComplete"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:fontFamily="sans-serif-light"
-        android:hint="@string/insere_o_conte_do"
+        android:hint="Insere o Conteúdo"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:inputType="textAutoComplete"
@@ -36,21 +36,21 @@
     android:layout_height="match_parent">
     <Button
         android:id="@+id/button_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginRight="250dp"
-        android:text="@string/editar"
+        android:text="Editar"
         android:textColor="@android:color/white"
         app:backgroundTint="@android:color/holo_green_dark"/>
 
     <Button
         android:id="@+id/button_remove"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="450dp"
         android:layout_marginRight="50dp"
-        android:text="@string/remove"
+        android:text="Remover"
         android:textColor="@android:color/white"
         app:backgroundTint="@android:color/holo_red_light" />
 </RelativeLayout>
